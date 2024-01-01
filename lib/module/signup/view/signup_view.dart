@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:login_signup_ui/core.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import '../controller/signup_controller.dart';
 
-class LoginView extends StatefulWidget {
-  const LoginView({Key? key}) : super(key: key);
+class SignupView extends StatefulWidget {
+  const SignupView({Key? key}) : super(key: key);
 
-  Widget build(context, LoginController controller) {
+  Widget build(context, SignupController controller) {
     controller.view = this;
     return SafeArea(
       child: Scaffold(
@@ -15,21 +16,19 @@ class LoginView extends StatefulWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const IllustrationImage(
-                  image: "assets/login.png",
-                ),
+                const IllustrationImage(image: "assets/signup.png"),
                 const SizedBox(
                   height: 12.0,
                 ),
                 const Text(
-                  'Welcome back!',
+                  'Let\'s Get Started',
                   style: TextStyle(
                     fontSize: 24.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 const Text(
-                  'Let\'s login for explore continues',
+                  'create an account to get all features',
                   style: TextStyle(
                     color: Colors.grey,
                   ),
@@ -37,7 +36,6 @@ class LoginView extends StatefulWidget {
                 const SizedBox(
                   height: 12.0,
                 ),
-                // form input
                 FormInputText(
                   prefixIcon: MdiIcons.email,
                   hintText: 'email',
@@ -54,26 +52,22 @@ class LoginView extends StatefulWidget {
                   onPressed: () => controller.togglePasswordStatus(),
                 ),
                 const SizedBox(
-                  height: 8.0,
+                  height: 12.0,
                 ),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      'Forgot password?',
-                      style: TextStyle(
-                        fontSize: 12.0,
-                        color: Colors.grey,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
+                FormInputPassword(
+                  obscureText: controller.obscureTextConfirm,
+                  prefixIcon: MdiIcons.lock,
+                  iconButton: controller.obscureTextConfirm
+                      ? MdiIcons.eye
+                      : MdiIcons.eyeOff,
+                  hintText: 'confirm password',
+                  onPressed: () => controller.togglePasswordConfirmStatus(),
                 ),
                 const SizedBox(
                   height: 12.0,
                 ),
                 CustomButton(
-                  label: 'Login',
+                  label: 'Sign Up',
                   onPressed: () {},
                 ),
                 const SizedBox(
@@ -119,15 +113,15 @@ class LoginView extends StatefulWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      'Don\'t have an account?',
+                      'Already have account?',
                     ),
                     const SizedBox(
                       width: 4.0,
                     ),
                     InkWell(
-                      onTap: () => Navigator.pushNamed(context, '/signup'),
+                      onTap: () => Navigator.pushNamed(context, '/'),
                       child: Text(
-                        'Sign up',
+                        'Login',
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.primary,
                           fontWeight: FontWeight.bold,
@@ -145,5 +139,5 @@ class LoginView extends StatefulWidget {
   }
 
   @override
-  State<LoginView> createState() => LoginController();
+  State<SignupView> createState() => SignupController();
 }
