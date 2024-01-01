@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:login_signup_ui/core.dart';
+import 'package:login_signup_ui/shared/widget/custom_button.dart';
+import 'package:login_signup_ui/shared/widget/form_input_password.dart';
+import 'package:login_signup_ui/shared/widget/form_input_text.dart';
+import 'package:login_signup_ui/shared/widget/illustration_image.dart';
+import 'package:login_signup_ui/shared/widget/sign_with_google_button.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import '../controller/login_controller.dart';
 
@@ -16,19 +21,12 @@ class LoginView extends StatefulWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // introduction image
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.3,
-                  width: MediaQuery.of(context).size.width,
-                  child: Image.asset(
-                    "assets/login.png",
-                    fit: BoxFit.cover,
-                  ),
+                const IllustrationImage(
+                  image: "assets/login.png",
                 ),
                 const SizedBox(
                   height: 12.0,
                 ),
-                // title text
                 const Text(
                   'Welcome back!',
                   style: TextStyle(
@@ -46,79 +44,24 @@ class LoginView extends StatefulWidget {
                   height: 12.0,
                 ),
                 // form input
-                SizedBox(
-                  height: 58.0,
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(
-                        MdiIcons.email,
-                        size: 24.0,
-                        color: Colors.grey,
-                      ),
-                      hintText: 'email',
-                      hintStyle: const TextStyle(
-                        color: Colors.grey,
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.grey[300]!,
-                        ),
-                        borderRadius: BorderRadius.circular(16.0),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          width: 2.0,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                        borderRadius: BorderRadius.circular(16.0),
-                      ),
-                    ),
-                    onChanged: (value) {},
-                  ),
+                FormInputText(
+                  prefixIcon: MdiIcons.email,
+                  hintText: 'email',
                 ),
                 const SizedBox(
                   height: 12.0,
                 ),
-                SizedBox(
-                  height: 58.0,
-                  child: TextFormField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(
-                        MdiIcons.lock,
-                        size: 24.0,
-                        color: Colors.grey,
-                      ),
-                      suffixIcon: Icon(
-                        MdiIcons.eye,
-                        size: 24.0,
-                        color: Colors.grey,
-                      ),
-                      hintText: 'password',
-                      hintStyle: const TextStyle(
-                        color: Colors.grey,
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.grey[300]!,
-                        ),
-                        borderRadius: BorderRadius.circular(16.0),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          width: 2.0,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                        borderRadius: BorderRadius.circular(16.0),
-                      ),
-                    ),
-                    onChanged: (value) {},
-                  ),
+                FormInputPassword(
+                  obscureText: controller.obscureText,
+                  prefixIcon: MdiIcons.lock,
+                  iconButton:
+                      controller.obscureText ? MdiIcons.eye : MdiIcons.eyeOff,
+                  hintText: 'password',
+                  onPressed: () => controller.togglePasswordStatus(),
                 ),
                 const SizedBox(
                   height: 8.0,
                 ),
-                // forgot password
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -135,31 +78,13 @@ class LoginView extends StatefulWidget {
                 const SizedBox(
                   height: 12.0,
                 ),
-                // sign in button
-                SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  height: 50.0,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Theme.of(context).colorScheme.primary,
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                    ),
-                    onPressed: () {},
-                    child: const Text(
-                      'Login',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
+                CustomButton(
+                  label: 'Login',
+                  onPressed: () {},
                 ),
                 const SizedBox(
                   height: 8.0,
                 ),
-                // divider
                 Row(
                   children: <Widget>[
                     Expanded(
@@ -192,34 +117,10 @@ class LoginView extends StatefulWidget {
                 const SizedBox(
                   height: 12.0,
                 ),
-                // sign with google
-                SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child: OutlinedButton.icon(
-                    icon: Image.asset(
-                      "assets/ic_google.png",
-                      width: 24.0,
-                      height: 24.0,
-                      fit: BoxFit.fill,
-                    ),
-                    label: const Text("Sign Up with Google"),
-                    style: OutlinedButton.styleFrom(
-                      padding: const EdgeInsets.all(14.0),
-                      foregroundColor: Colors.black,
-                      side: BorderSide(
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                    ),
-                    onPressed: () {},
-                  ),
-                ),
+                const SignWithGoogleButton(),
                 const SizedBox(
                   height: 12.0,
                 ),
-                // register
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -229,11 +130,14 @@ class LoginView extends StatefulWidget {
                     const SizedBox(
                       width: 4.0,
                     ),
-                    Text(
-                      'Sign up',
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.primary,
-                        fontWeight: FontWeight.bold,
+                    InkWell(
+                      onTap: () {},
+                      child: Text(
+                        'Sign up',
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],
