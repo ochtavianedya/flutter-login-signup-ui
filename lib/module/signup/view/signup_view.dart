@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login_signup_ui/core.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import '../controller/signup_controller.dart';
 
 class SignupView extends StatefulWidget {
   const SignupView({Key? key}) : super(key: key);
@@ -68,7 +67,8 @@ class SignupView extends StatefulWidget {
                 ),
                 CustomButton(
                   label: 'Sign Up',
-                  onPressed: () {},
+                  onPressed: () =>
+                      Navigator.pushNamed(context, '/verification-otp'),
                 ),
                 const SizedBox(
                   height: 8.0,

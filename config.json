@@ -1,7 +1,8 @@
 {
     "modules": [
         "login",
-        "signup"
+        "signup",
+        "verification_otp"
     ],
     "module_directory_name": "module",
     "experimental_mode": false,

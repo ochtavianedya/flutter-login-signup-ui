@@ -7,6 +7,8 @@ export 'package:login_signup_ui/module/login/controller/login_controller.dart';
 export 'package:login_signup_ui/module/login/view/login_view.dart';
 export 'package:login_signup_ui/module/signup/controller/signup_controller.dart';
 export 'package:login_signup_ui/module/signup/view/signup_view.dart';
+export 'package:login_signup_ui/module/verification_otp/controller/verification_otp_controller.dart';
+export 'package:login_signup_ui/module/verification_otp/view/verification_otp_view.dart';
 export 'package:login_signup_ui/shared/theme/theme.dart';
 export 'package:login_signup_ui/shared/widget/custom_button.dart';
 export 'package:login_signup_ui/shared/widget/form_input_password.dart';
